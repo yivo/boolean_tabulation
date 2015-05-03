@@ -1,1 +1,1 @@
-# boolean_tabulation
+# truth_table
