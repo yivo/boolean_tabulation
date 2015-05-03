@@ -19,7 +19,15 @@ class Helper
   end
 
   def wrap_in_parentheses(expr)
-    "(#{expr})"
+    operand?(expr) || in_parentheses?(expr) ? expr : "(#{expr})"
+  end
+
+  def operand?(str)
+    str =~ /\A\w+\Z/
+  end
+
+  def in_parentheses?(expr)
+    expr =~ /\A\(/ && expr =~ /\)\Z/
   end
 
   def function_variables(func)
