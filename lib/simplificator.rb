@@ -6,14 +6,14 @@ class Simplificator
     @helper = Helper.new
   end
 
-  def simplify_all(func)
+  def simplify_all(func, options = {})
     Resources::COMPLEX_OPERATIONS.each do |operation|
-      func = simplify_operation func, operation
+      func = simplify_operation func, operation, options
     end
     func
   end
 
-  def simplify_operation(func, op)
+  def simplify_operation(func, op, options = {})
     formula = formula_for_operation! op
     remove_whitespace! func
 
@@ -27,11 +27,13 @@ class Simplificator
       right_expr  = helper.leading_expression right_part
       new_expr    = build_expression formula.clone, left_expr, right_expr
 
-      debug_iteration func, op, op_index, left_part, left_expr, right_part, right_expr, new_expr
+      if options[:debug]
+        debug_iteration func, op, op_index, left_part, left_expr, right_part, right_expr, new_expr
+      end
 
       func = func[0...op_index - left_expr.length] +
-          wrap_in_parentheses(new_expr) +
-          func[op_index + right_expr.length + op_length..-1]
+        wrap_in_parentheses(new_expr) +
+        func[op_index + right_expr.length + op_length..-1]
     end
     func
   end

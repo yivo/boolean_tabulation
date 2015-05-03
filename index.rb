@@ -4,11 +4,12 @@ require './lib/helper'
 require './lib/simplificator'
 require './lib/truth_table'
 
-func = gets
+func  = ARGV.first.dup
+debug = ARGV.include?('--debug')
 
 simplificator = Simplificator.new
-func = simplificator.simplify_all func
-puts func
+func = simplificator.simplify_all func, debug: debug
+puts "Simplified function to #{func}"
 
 truth_table = TruthTable.new
 truth_table.print func

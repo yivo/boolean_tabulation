@@ -1,8 +1,8 @@
 module Resources
-  SIMPLE_OPERATIONS     = %w{ && || }
+  PRIMITIVE_OPERATIONS  = %w{ && || }
   COMPLEX_OPERATIONS    = %w{ + | |> -> <> <-> }
   UNARY_OPERATIONS      = %w{ ! }
-  BINARY_OPERATIONS     = [SIMPLE_OPERATIONS, COMPLEX_OPERATIONS].flatten
+  BINARY_OPERATIONS     = [PRIMITIVE_OPERATIONS, COMPLEX_OPERATIONS].flatten
 
   SIMPLIFICATION_FORMULAS = {
       '+'   => '(\1 && !\2) || (!\1 && \2)',  # Сложение по модулю два
